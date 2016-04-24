@@ -1,0 +1,440 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+        
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main">
+        
+    	<div class="slider-container rev_slider_wrapper" style="height: 700px;">
+    		<div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options='{"delay": 9000, "gridwidth": 800, "gridheight": 700}'>
+    			<ul>
+                    {% for e in next_events %}
+                        <li data-transition="fade">
+                            <img src="{{e.image_url}}"  
+                                        alt=""
+                                        data-bgposition="center center" 
+                                        data-bgfit="cover" 
+                                        data-bgrepeat="no-repeat" 
+                                        class="rev-slidebg">
+                            <div class="tp-caption"
+                                        data-x="center" data-hoffset="-150"
+                                        data-y="center" data-voffset="-95"
+                                        data-start="1000"
+                                        style="z-index: 5"
+                                        data-transform_in="x:[-300%];opacity:0;s:500;"><img src="{% static 'img/slides/slide-title-border.png' %}" alt=""></div>
+                            <div class="tp-caption top-label"
+                                        data-x="center" data-hoffset="0"
+                                        data-y="center" data-voffset="-95"
+                                        data-start="500"
+                                        style="z-index: 5"
+                                        data-transform_in="y:[-300%];opacity:0;s:500;">Próximo evento</div>
+                            <div class="tp-caption"
+                                        data-x="center" data-hoffset="150"
+                                        data-y="center" data-voffset="-95"
+                                        data-start="1000"
+                                        style="z-index: 5"
+                                        data-transform_in="x:[300%];opacity:0;s:500;"><img src="{% static 'img/slides/slide-title-border.png' %}" alt=""></div>
+                            <div class="tp-caption main-label"
+                                        data-x="center" data-hoffset="0"
+                                        data-y="center" data-voffset="-45"
+                                        data-start="1500"
+                                        data-whitespace="nowrap"						 
+                                        data-transform_in="y:[100%];s:500;"
+                                        data-transform_out="opacity:0;s:500;"
+                                        style="z-index: 5"
+                                        data-mask_in="x:0px;y:0px;">{{e.name}}</div>
+                            <div class="tp-caption bottom-label"
+                                        data-x="center" data-hoffset="0"
+                                        data-y="center" data-voffset="5"
+                                        data-start="2000"
+                                        style="z-index: 5"
+                                        data-transform_in="y:[100%];opacity:0;s:500;">{{e.date_start}}</div>
+                            <a class="tp-caption btn btn-lg btn-primary btn-slider-action"
+                                        data-hash
+                                        data-hash-offset="85"
+                                        href="/event/{{e.pk}}"
+                                        data-x="center" data-hoffset="0"
+                                        data-y="center" data-voffset="80"
+                                        data-start="2200"
+                                        data-whitespace="nowrap"						 
+                                        data-transform_in="y:[100%];s:500;"
+                                        data-transform_out="opacity:0;s:500;"
+                                        style="z-index: 5"
+                                        data-mask_in="x:0px;y:0px;">Registrate ahora!</a>
+                        </li>
+                    {% endfor %}
+    			</ul>
+    		</div>
+    	</div>
+    	<div class="home-intro" id="home-intro">
+    		<div class="container">
+    
+    			<div class="row">
+    				<div class="col-md-8">
+    					<p>
+    						¿Quiéres contratarnos?
+    						<span>Consulta nuestros servicios y patrocinadores.</span>
+    					</p>
+                    </div>
+    				<div class="col-md-4">
+    					<div class="mt-lg mb-xl">
+    						<a href="/contact" data-hash class="btn btn-primary mr-md appear-animation" data-appear-animation="fadeInDown" data-appear-animation-delay="300">CONCTÁCTANOS AHORA</a>
+    					</div>
+    				</div>
+    			</div>
+    
+    		</div>
+    	</div>
+    
+    	<div class="container">
+            <!-------------The recent results section----------------->
+			<div class="row">
+				<div class="col-md-12">
+					<h2><i class="fa fa-cubes"></i> Resultados recientes</h2>
+					<div class="owl-carousel owl-theme" data-plugin-options='{"items": 4, "margin": 20, "loop": false}'>
+                        {% for e in last_events_results %}
+                            <div class="portfolio-item">
+                                <a href="/event/rd/{{e.pk}}" data-portfolio-on-modal>
+                                    <span class="thumb-info thumb-info-lighten">
+                                        <span class="thumb-info-wrapper">
+                                            <img src="{{e.image_url}}" class="img-responsive" alt="">
+                                            <span class="thumb-info-title">
+                                                <span class="thumb-info-inner">{{e.name}}</span>
+                                                <span class="thumb-info-type">{{e.date_start}}</span>
+                                            </span>
+                                            <span class="thumb-info-action">
+                                                <span class="thumb-info-action-icon"><i class="fa fa-clock-o"></i></span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                        {% endfor %}
+					</div>
+					<hr class="tall">
+				</div>
+			</div>
+    		<!--End of the recent result section--->
+    		
+    		<!-------------This section will set the users info and events info-------------->
+    		<div class="row">
+    			<div class="col-md-12 center">
+    				<h2 class="word-rotator-title mb-sm">Porto is the <strong>most <span class="word-rotate" data-plugin-options='{"delay": 2000, "animDelay": 300}'>
+    					<span class="word-rotate-items">
+    						<span>popular</span>
+    						<span>awesome</span>
+    						<span>incredible</span>
+    					</span>
+    				</span></strong> HTML Site template on ThemeForest.</h2>
+    				<p class="lead">Trusted by over 20,000 satisfied users, Porto is a huge success<br>in the of one of the world’s largest MarketPlace.</p>
+    			</div>
+    		</div>
+            <!--------------End of info of event and users-------->
+    		
+    		<div class="row mt-xl">
+    			<div class="counters counters-text-dark">
+    				<div class="col-md-3 col-sm-6">
+    					<div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="300">
+    						<i class="fa fa-user"></i>
+    						<strong data-to="{{num_competitions}}" data-append="+">0</strong>
+    						<label>Competencias</label>
+    						<p class="text-color-primary mb-xl">Regístrate</p>
+    					</div>
+    				</div>
+    				<div class="col-md-3 col-sm-6">
+    					<div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="600">
+    						<i class="fa fa-desktop"></i>
+    						<strong data-to="{{num_competitors}}">0</strong>
+    						<label>Competidores</label>
+    						<p class="text-color-primary mb-xl">Y más por venir</p>
+    					</div>
+    				</div>
+    				<div class="col-md-3 col-sm-6">
+    					<div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="900">
+    						<i class="fa fa-ticket"></i>
+    						<strong data-to="15" data-append="+">0</strong>
+    						<label>Patrocinadores</label>
+    						<p class="text-color-primary mb-xl">Ellos confían en nosotros</p>
+    					</div>
+    				</div>
+    				<div class="col-md-3 col-sm-6">
+    					<div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="1200">
+    						<i class="fa fa-clock-o"></i>
+    						<strong data-to="{{num_events}}" data-append="+">0</strong>
+    						<label>Eventos</label>
+    						<p class="text-color-primary mb-xl">Con resultados disponibles</p>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    
+    	</div>
+        <!---------- services section----->
+    	<section class="section section-default section-with-mockup mb-none">
+				<div class="container">
+					<!----------Servicios, description---------->
+					<div class="row">
+						<div class="col-md-12">
+							<h2>Nuestros <strong>servicios</strong></h2>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-clock-o"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Cronometraje electrónico en tiempo real</h4>
+											<p class="tall">Tus resultados en línea todo el tiempo.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-envelope"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Servicio de mensajería</h4>
+											<p class="tall">Tu tiempo en SMS.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-book"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Asesoramiento para tus eventos</h4>
+											<p class="tall">Nosotros te ayudamos en tu evento.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-shopping-bag"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Kit de competencia</h4>
+											<p class="tall">Te damos tu tag de competencia, playera y número.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-photo"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Foto y Video de Carrera</h4>
+											<p class="tall">Comparte tu momento de llegada.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-trophy"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Premiación</h4>
+											<p class="tall">Medallas, efectivo, tú dílo.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-line-chart"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Reportes y Estádisticas</h4>
+											<p class="tall">Te damos datos para que tu evento porgrese.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-cc-paypal"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="heading-primary mb-none">Inscripciones en línea con paypal</h4>
+											<p class="tall">Inscríbete ahora en línea sin buscar puntos de venta.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!----------End of Servicios, description---------->
+				
+					<hr class="tall">
+					
+					<div class="row center">
+						<div class="col-md-12">
+							<h2 class="mb-sm word-rotator-title">
+								Nuestros patrocinadores están
+								<strong>
+									<span class="word-rotate" data-plugin-options='{"delay": 3500, "animDelay": 400}'>
+										<span class="word-rotate-items">
+											<span>contentos</span> 
+											<span>felices</span>
+										</span>
+									</span>
+								</strong>
+								con nuestros eventos...
+							</h2>
+							<h4 class="heading-primary lead tall">{{num_competitors}} competidores, {{num_events}} eventos y 15 patrocinadores.</h4>
+						</div>
+					</div>
+					<!----------patrocinadores---------->
+					<div class="row center">
+						<div class="owl-carousel owl-theme" data-plugin-options='{"items": 6, "autoplay": true, "autoplayTimeout": 3000}'>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/tLSYGi1.png" alt="">
+							</div>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/KhXu5VT.png" alt="">
+							</div>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/Rliae3p.png" alt="">
+							</div>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/jqKl9Af.png" alt="">
+							</div>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/qGVirVo.png" alt="">
+							</div>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/XSt8fpF.png" alt="">
+							</div>
+							<div>
+								<img class="img-responsive" src="http://i.imgur.com/xJqTMlS.png" alt="">
+							</div>
+						</div>
+					</div>
+					<!---------- End of patrocinadores---------->
+				</div>
+    	</section>
+        <!------End of services section----->
+    	
+    	<section class="call-to-action call-to-action-primary call-to-action-front mb-none">
+    		<div class="container">
+    			<div class="row">
+    				<div class="col-md-12">
+    					<div class="call-to-action-content align-left pb-md mb-xl ml-none">
+    						<h2 class="text-color-light mb-none mt-xl">Crea tu propio evento que <strong>inspire</strong> a la comunidad.</h2>
+    						<p class="lead mb-xl">Obtén una cotización</p>
+    					</div>
+    					<div class="call-to-action-btn">
+    						<a href="/contact" target="_blank" class="btn btn-lg btn-primary btn-primary-scale-2 mr-md">Contáctanos</a>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+    	
+    	<section class="section section-default">
+    		<div class="container">
+    			<div class="row">
+    				<div class="col-md-9">
+    					<h2>Nuestra historia</h2>
+    					<p>
+    						Fundada en el 2015, Actime brinda servicios para la elaboración de eventos deportivos auténticos con el fin de crear una experiencia única para atletas y organizadores.	
+    					</p>
+    				</div>
+    				<div class="col-md-3">
+    					<img class="hidden-xs img-responsive appear-animation" style="margin-top: 0px;" src="http://i.imgur.com/oaC7Klu.jpg" alt="" data-appear-animation="fadeInRight">
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+    	
+    	<div class="container">
+    		<div class="row mt-xl mb-xl">
+    			<div class="col-md-3">
+    				<img class="img-responsive mt-xl appear-animation" src="http://i.imgur.com/JtnUEnA.jpg" alt="" data-appear-animation="fadeInLeft">
+    			</div>
+    			<div class="col-md-9">
+    				<h2 class="mt-xl">Misión</h2>
+    				<p>
+    				Crear y promover eventos deportivos de una manera profesional, usando nuestra tecnología para brindar resultados exactos que generen valor a atletas y organizadores.
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<section class="section section-default">
+    		<div class="container">
+    			<div class="row">
+    				<div class="col-md-9">
+    					<h2>Visión</h2>
+    					<p>
+    						Nuestra visión es de generar un estilo de vida saludable para nuestra comunidad a través eventos deportivos auténticos y tecnología que permita generar una experiencias inigualables.
+    					</p>
+    				</div>
+    				<div class="col-md-3">
+    					<img class="hidden-xs img-responsive appear-animation" style="margin-top:  0px;" src="http://i.imgur.com/cos5CK0.jpg" alt="" data-appear-animation="fadeInRight">
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+    	
+    	<section class="parallax section section-text-light section-parallax section-center mt-xl mb-none" data-stellar-background-ratio="0.5" style="background-image: url(img/parallax-image.jpg);">
+    		<div class="container">
+    			<div class="row">
+    				<div class="col-md-10 col-md-offset-1">
+    					<h2><i class="fa fa-star font-size-xs mr-xs"></i><i class="fa fa-star font-size-xs mr-xs"></i><i class="fa fa-star font-size-xs mr-xs"></i><i class="fa fa-star font-size-xs mr-xs"></i><i class="fa fa-star font-size-xs"></i><br><strong>What Client’s Say</strong></h2>
+    					<div class="owl-carousel owl-theme nav-bottom rounded-nav mb-none" data-plugin-options='{"items": 1, "loop": false}'>
+    						<div>
+    							<div class="col-md-12">
+    								<div class="testimonial testimonial-style-2 testimonial-with-quotes mb-none">
+    									<blockquote>
+    										<p>Outstanding about everything : - Support is fast and perfect : I got answers to every questions I asked. - Code quality is up to date, modern, structured, clear, easy to understand. - Responsive IS responsive (any screen size, smartphone & tablet. - Design is pure and esthetic. - Okler provide update. Thank you Okler team for all of this ! Keep going !</p>
+    									</blockquote>
+    									<div class="testimonial-author">
+    										<p><strong>Gothvel</strong></p>
+    									</div>
+    								</div>
+    							</div>
+    						</div>
+    						<div>
+    							<div class="col-md-12">
+    								<div class="testimonial testimonial-style-2 testimonial-with-quotes mb-none">
+    									<blockquote>
+    										<p>This theme is totally customizable, clean with all the options you could want. Don't want full screen layout? With one word added to the code the entire site becomes boxed version... The customer support is absolutely unsurpassed. Can not recommend this enough.</p>
+    									</blockquote>
+    									<div class="testimonial-author">
+    										<p><strong>katefischer510</strong></p>
+    									</div>
+    								</div>
+    							</div>
+    						</div>
+    						<div>
+    							<div class="col-md-12">
+    								<div class="testimonial testimonial-style-2 testimonial-with-quotes mb-none">
+    									<blockquote>
+    										<p>The code is extremely well organized, the help information and support is terrific and the options provided by the template are about the most thorough I've found - what more could you ask for?</p>
+    									</blockquote>
+    									<div class="testimonial-author">
+    										<p><strong>sibelius</strong></p>
+    									</div>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+    
+    </div>
+    
+{% endblock %}
+
+{% block extra_scripts %}
+    
+{% endblock %}

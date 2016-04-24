@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load app_filters %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11,r-2.0.2,se-1.1.2/datatables.min.css"/>
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main">
+    
+		<section class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="#">Home</a></li>
+							<li class="active">Shortcodes</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Tables</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+                    <hr class="tall">
+                
+                	<h4>Hover rows</h4>
+                
+                	<table class="display" id="results_table">
+                		<thead>
+                			<tr>
+                				<th>
+                					Nombre
+                				</th>
+                				<th>
+                					Apellidos
+                				</th>
+                				<th>
+                					Categoría
+                				</th>
+                				<th>
+                					Competencia
+                				</th>
+                				<th>
+                					Tiempos
+                				</th>
+                				<th>
+                					Lugar en categoría
+                				</th>
+                				<th>
+                					Lugar global
+                				</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			{% for r in registers %}
+                			    <tr>
+                    				<td>
+                    					{{r.competitor.name}}
+                    				</td>
+                    				<td>
+                    					{{r.competitor.second_name}}
+                    				</td>
+                    				<td>
+                    					{{r.category}}
+                    				</td>
+                    				<td>
+                    				    {{r.competition}}
+                    				</td>
+                    				<td>
+                    				    ----1------
+                    				</td>
+                    				<td>
+                    				    lugar
+                    				</td>
+                    				<td>
+                    				    lugar
+                    				</td>
+                    			</tr>
+                			{% endfor %}
+                		</tbody>
+                	</table>
+                
+                	<hr class="tall">
+                </div>
+            </div>
+            
+        </div>
+	</div>
+	
+{% endblock %}
+
+{% block extra_scripts %}
+    <script type="text/javascript" src="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11,r-2.0.2,se-1.1.2/datatables.min.js"></script>
+    <script>
+	    $(document).ready( function () {
+	    	$('#results_table').DataTable();
+		});
+    </script>
+{% endblock %}

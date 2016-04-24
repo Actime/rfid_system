@@ -1,0 +1,407 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load app_filters %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main">
+    	
+        <section class="page-header">
+            <div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="#">Inicio</a></li>
+							<li class="active">Detalle de evento</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>{{event.name}}</h1>
+					</div>
+				</div>
+			</div>        
+        </section>
+        
+        <div class="container">
+            <div class="row">
+				<div class="col-md-8">
+				    <img class="img-responsive img-rounded mb-lg" src="{{event.image_url}}" alt="{{event.name}}">
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+							<div class="panel-group panel-group-secondary" id="accordion2Secondary">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2Secondary" href="#collapse2SecondaryOne">
+												<center>{{event.date_start|get_month}}</center>
+											</a>
+										</h4>
+									</div>
+									<div id="collapse2SecondaryOne" class="accordion-body collapse in">
+										<div class="panel-body">
+											<center>
+												<h1 style="font-weight:bold;font-size:50px">{{event.date_start.day}}</h1>
+											</center>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<center>
+							<div class="col-md-6 col-sm-6 ">
+								<a href="/competitor/register/{{event.pk}}">
+									<button type="button" class="btn btn-danger btn-lg"><i class="fa fa-pencil-square-o"></i> Inscribete</button>
+								</a>
+								<br><br><br>
+								<button type="button" class="btn btn-borders btn-info btn-lg"><i class="fa fa-share-alt"></i> Comparte</button>
+							</div>
+						</center>
+						<div class="col-md-12">
+							<div class="panel-group panel-group-primary" id="accordion2Primary">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2Primary" href="#collapse2PrimaryOne">
+												<i class="fa fa-calendar"></i>  Fecha y Hora
+											</a>
+										</h4>
+									</div>
+									<div id="collapse2PrimaryOne" class="accordion-body collapse in">
+										<div class="panel-body">
+											<p>
+												<span class="label label-lg label-success"><i class="fa fa-calendar-plus-o"></i> {{event.date_start}}</span>
+											</p>
+											<p>
+												<span class="label label-lg label-danger"><i class="fa fa-calendar-times-o"></i> {{event.date_finish}}</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr class="tall">
+			
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+						<div class="col-md-12">
+							<div class="featured-box featured-box-secondary featured-box-text-left">
+								<div class="box-content">
+									<div class="row">
+										<div class="col-md-12">
+											<h2> <i class="fa fa-reorder"></i> Descripción del evento</h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<p>{{event.description}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+                    <div class="row">
+						<div class="col-md-12">
+							<div class="featured-box featured-box-secondary featured-box-text-left">
+								<div class="box-content">
+									<div class="row">
+										<div class="col-md-12">
+											<h2> <i class="fa fa-map-marker"></i> Ubicación</h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div id="googlemaps" class="google-map small"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="row">
+						<div class="col-md-12">
+							<div class="featured-box featured-box-secondary featured-box-text-left">
+								<div class="box-content">
+									<div class="row">
+										<div class="col-md-12">
+											<h2><i class="fa fa-list-ul"></i> Competencias</h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+										    <ul class="list list-icons">
+										        {% for competition in event|get_all_competitions %}
+    							                    <li> 
+    										            <p>
+    										                <i class="fa fa-ship"></i> {{competition.name}} 
+    										            </p>
+    										            <p>
+        										            <span class="label label-lm label-success">
+        										                Hora de inicio :
+        										                {{competition.date_start.time}}
+    									                    </span>
+    									                    <span class="label label-lm label-danger">
+        										                Hora de cierre :
+        										                {{competition.date_finish.time}}
+    									                    </span>
+    									                </p> 
+														<p>
+															<table class="table">
+																<thead>
+																	<tr>
+																		<th>Nombre</th>
+																		<th>Descripción</th>
+																		<th>Edades</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	{% for category in competition|get_all_categories %}
+		    									                        <tr>
+		    									                        	<td>
+			    									                            {{category.name}}
+		    									                            </td>
+		    									                            <td>
+			    									                            {{category.description}}
+		    									                            </td>
+		    									                            <td>
+			    									                            <span class="label label-lm label-warning">
+			    									                            	( {{category.age_1}} - {{category.age_2}} ) años
+			    									                            </span>
+		    									                            </td>
+		    									                        </tr>
+		    									                    {% endfor %}
+	    									                    </tbody>
+															</table>
+														</p>
+    										        </li>
+										        {% endfor %}
+										    </ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="col-md-3">
+					<aside class="sidebar">
+
+						<div class="tabs mb-xlg">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#popularPosts" data-toggle="tab"><i class="fa fa-info-circle"></i> Info</a></li>
+								<li><a href="#recentPosts" data-toggle="tab"><i class="fa fa-trophy"></i> Premios</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="popularPosts">
+									<ul class="simple-post-list">
+										<li>
+											<div class="row">
+    											<div class="col-md-12">
+        											<div class="post-info">
+        											    <div class="heading heading-border heading-middle-border heading-middle-border-center">
+        												    <h4>Recorridos</h4>
+        												</div>
+        											</div>
+        										</div>
+        										{% for competition in event|get_all_competitions  %}
+												    <div class="col-md-12">
+												        <div class="post-image">
+												            <center>
+	    														<div class="img-thumbnail">
+	    															<h4>{{competition.name}}</h4>
+	    															<a href="{{competition.image_url}}">
+	        													    	<img class="img-responsive img-rounded mb-lg" src="{{competition.image_url}}" alt="{{competition.image_url}}">
+	    															</a>
+	    														</div>
+															</center>
+														</div>
+	    											</div>
+	    										{% endfor %}
+        									</div>
+										</li>
+										<li>
+											<center>
+											<div class="row">
+												<div class="col-md-12">
+													<a href="/competitor/register/{{event.pk}}">
+														<button type="button" class="btn btn-borders btn-danger btn-lg"><i class="fa fa-pencil-square-o"></i> Inscríbete</button>
+													</a>
+												</div>
+											</div>
+											</center>
+										</li>
+										<li>
+
+                							<h4>Convocatorias</h4>
+                
+                							<div class="owl-carousel owl-theme nav-bottom rounded-nav" data-plugin-options='{"loop": false, "nav": true, "dots": false}'>
+                								<div>
+                									<img class="img-responsive" src="http://i.imgur.com/xc30Kyl.png" alt="">
+                									<span class="label label-sm label-info">Patro...</span>
+                								</div>
+                								<div>
+                									<img class="img-responsive" src="http://i.imgur.com/kMdvOwE.png" alt="">
+                									<span class="label label-sm label-info">Patro...</span>
+                								</div>
+                								<div>
+                									<img class="img-responsive" src="http://i.imgur.com/kMdvOwE.png" alt="">
+                									<span class="label label-sm label-info">Patro...</span>
+                								</div>
+                								<div>
+                									<img class="img-responsive" src="http://i.imgur.com/xc30Kyl.png" alt="">
+                									<span class="label label-sm label-info">Patro...</span>
+                									
+                								</div>
+                								<div>
+                									<img class="img-responsive" src="http://i.imgur.com/xc30Kyl.png" alt="">
+                									<span class="label label-sm label-info">Patro...</span>
+                								</div>
+                							</div>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-pane" id="recentPosts">
+									<ul class="simple-post-list">
+										
+										{% for p in event|get_prices %}
+											<li>
+												<div class="post-image">
+													<div class="img-thumbnail">
+														<a href="blog-post.html">
+															<img src="{{p.image_url}}" alt="">
+														</a>
+													</div>
+												</div>
+												<div class="post-info">
+													<a href="blog-post.html">{{p.name}}</a>
+													<div class="post-meta">
+														 {{p.description}}
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+					</aside>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    
+	<script src="https://maps.google.com/maps/api/js"></script>
+	
+	<script>
+
+		/*
+		Map Settings
+
+			Find the Latitude and Longitude of your address:
+				- http://universimmedia.pagesperso-orange.fr/geo/loc.htm
+				- http://www.findlatitudeandlongitude.com/find-address-from-latitude-and-longitude/
+
+		*/
+
+		// Map Markers
+		var mapMarkers = [{
+			address:"{{event.address}}",
+			html: "<strong>{{event.address}}</strong>",
+			icon: {
+				image: "img/pin.png",
+				iconsize: [26, 46],
+				iconanchor: [12, 46]
+			},
+			popup: true
+		}];
+
+		// Map Initial Location
+		var initLatitude = {{event|get_latitude}};
+		var initLongitude = {{event|get_longitude}};
+
+		// Map Extended Settings
+		var mapSettings = {
+			controls: {
+				draggable: (($.browser.mobile) ? false : true),
+				panControl: true,
+				zoomControl: true,
+				mapTypeControl: true,
+				scaleControl: true,
+				streetViewControl: true,
+				overviewMapControl: true
+			},
+			scrollwheel: false,
+			markers: mapMarkers,
+			latitude: initLatitude,
+			longitude: initLongitude,
+			zoom: 16
+		};
+
+		var map = $("#googlemaps").gMap(mapSettings),
+			mapRef = $("#googlemaps").data('gMap.reference');
+
+		// Create an array of styles.
+		var mapColor = "#0088cc";
+
+		var styles = [{
+			stylers: [{
+				hue: mapColor
+			}]
+		}, {
+			featureType: "road",
+			elementType: "geometry",
+			stylers: [{
+				lightness: 0
+			}, {
+				visibility: "simplified"
+			}]
+		}, {
+			featureType: "road",
+			elementType: "labels",
+			stylers: [{
+				visibility: "off"
+			}]
+		}];
+
+		var styledMap = new google.maps.StyledMapType(styles, {
+			name: "Styled Map"
+		});
+
+		mapRef.mapTypes.set('map_style', styledMap);
+		mapRef.setMapTypeId('map_style');
+
+	</script>
+	
+{% endblock %}

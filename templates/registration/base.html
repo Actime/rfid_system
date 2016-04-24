@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	
+        <title>{% block title %}Code The Fuck Out!!!{% endblock %}</title>        
+        
+        {% include 'common/header.html' %}
+        
+        {% include 'common/fonts.html' %}
+        
+        {% include 'common/styles.html' %}
+        
+        {% block extra_head %}
+        
+        {% endblock %}
+        
+	</head>
+	<body>
+	    
+	    
+        
+        {% include 'common/scripts.html' %}
+        
+        {% block extra_scripts %}
+        
+        {% endblock %}
+        
+	</body>
+</html>

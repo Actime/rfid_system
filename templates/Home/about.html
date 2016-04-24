@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+        
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+	<div role="main" class="main">
+        <section class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="/">Inicio</a></li>
+							<li class="active">Nosotros</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Acerca de Actime</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+	    
+	    <div class="container">
+			<div class="row">
+			    <div class="col-md-12 center">
+				    <img class="img-responsive img-rounded mb-lg" src="http://i.imgur.com/sQpcGAx.png" alt="actime">
+			    </div>
+				<div class="col-md-12 center">
+					<h2 class="word-rotator-title mb-lg">
+						La nueva forma de 
+						<strong class="inverted inverted-primary">
+							<span class="word-rotate" data-plugin-options='{"delay": 2000, "animDelay": 300}'>
+								<span class="word-rotate-items">
+									<span>competir.</span>
+									<span>crear.</span>
+									<span>compartir.</span>
+								</span>
+							</span>				
+						</strong>
+					</h2>
+
+					<p class="lead">
+					    Sportstime surge de la sinergia de distintos problemas sociales en
+                        
+                        México, como lo son; problemas de salud y obesidad en la población, escasez de
+                        
+                        eventos deportivos con gran impacto social y profesionalismo, apoyo a
+                        
+                        empresas que buscan una identidad socialmente responsable.<br />
+                        
+                        Nuestro proyecto inicia en el 2013 en Fresnillo Zacatecas, con un evento
+                        
+                        pedestre, organizado de manera profesional, con finalidad de hacer consciencia
+                        
+                        social de la importancia del deporte en la ciudad.<br />
+                        
+                        Con tiempo y experiencia, hemos logrado brindar también el servicio de
+                        
+                        cronometraje electrónico, fotografías personalizadas, tomas áreas y publicidad
+                        
+                        (en distintos medios) de este tipo de eventos, teniendo como finalidad un
+                        
+                        servicio integral de competencias que facilite a organizadores y ejecutores llevar
+                        
+                        a cabo un evento profesional y atractivo.	
+					</p>
+
+					<hr class="tall">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="feature-box feature-box-style-2">
+						<div class="feature-box-icon">
+							<i class="fa fa-group"></i>
+						</div>
+						<div class="feature-box-info">
+							<h4 class="mb-none">Misión</h4>
+							<p class="tall">
+							    Brindar un servicio integral a nuestros clientes, planeadores y
+                                
+                                ejecutores de eventos deportivos brindándoles soluciones de calidad a precios
+                                
+                                racionales.
+                            </p>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-md-6">
+					<div class="feature-box feature-box-style-2">
+						<div class="feature-box-icon">
+							<i class="fa fa-eye" aria-hidden="true"></i>
+						</div>
+						<div class="feature-box-info">
+							<h4 class="mb-none">Visión</h4>
+							<p class="tall">
+							    Ser una empresa líder e innovadora en logística de eventos deportivos en
+                                
+                                donde nuestros clientes, participantes y aliados superen sus expectativas de
+                                
+                                nuestro servicio.
+                            </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    
+{% endblock %}

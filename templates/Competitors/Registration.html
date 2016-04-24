@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load app_filters %}
+
+{% load json_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main shop">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+					<hr class="tall">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="mb-none"><strong>Registro </strong></h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-9">
+                    <form action="/competitor/register/{{event.pk}}" id="frmBillingAddress" method="post">
+						{% csrf_token %}
+    					<div class="panel-group" id="accordion">
+    						<div class="panel panel-default">
+    							<div class="panel-heading">
+    								<h4 class="panel-title">
+    									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+    										Registro para "{{event.name}}"
+    									</a>
+    								</h4>
+    							</div>
+    							<div id="collapseOne" class="accordion-body collapse in">
+    								<div class="panel-body">
+    									<div class="row">
+    										<div class="form-group">
+    											<div class="col-md-12">
+    												
+    												<label>Competencia</label>
+    												
+    												<select class="form-control" id="cb_competition" name="competition">
+    												    
+    												    <option value="0">Selecciona una competencia</option>
+    												    
+    												    {% for c in competitions %}
+    													    <option value="{{c.pk}}">{{c.name}}</option>
+    													{% endfor %}
+    												
+    												</select>
+    											</div>
+    										</div>
+    									</div>
+    									<div class="row">
+    										<div class="form-group">
+    											<div class="col-md-12">
+    												<label>Categoría</label>
+    												<select class="form-control" id="id_category" name="category">
+    												    <option value="0">Selecciona una categoría</option>
+    												    
+    												</select>
+    											</div>
+    										</div>
+    									</div>
+    									<div class="row">
+    										<div class="form-group">
+    											<div class="col-md-12">
+    												<label>Equipo</label>
+    												<select class="form-control" id="id_team" name="team">
+    												    
+    												    {% for t in teams %}
+    													    <option value="{{t.pk}}">{{t.name}}</option>
+    													{% endfor %}
+    												
+    												</select>
+    											</div>
+    										</div>
+    									</div>
+    								</div>
+    							</div>
+    		                </div>
+    						
+    						<div class="panel panel-default">
+    							<div class="panel-heading">
+    								<h4 class="panel-title">
+    									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+    										Revisión y Pago
+    									</a>
+    								</h4>
+    							</div>
+    							<div id="collapseThree" class="accordion-body collapse">
+    								<div class="panel-body">
+    									<table class="shop_table cart">
+    										<thead>
+    											<tr>
+    												<th class="product-thumbnail">
+    													&nbsp;
+    												</th>
+    												<th class="product-name">
+    													Producto
+    												</th>
+    												<th class="product-price">
+    													Precio
+    												</th>
+    												<th class="product-quantity">
+    													Cantidad
+    												</th>
+    												<th class="product-subtotal">
+    													Total
+    												</th>
+    											</tr>
+    										</thead>
+    										<tbody>
+    											<tr class="cart_table_item">
+    												<td class="product-thumbnail">
+    													<a href="shop-product-sidebar.html">
+    													</a>
+    												</td>
+    												<td class="product-name">
+    													<a href="shop-product-sidebar.html" id="producto_field">Producto no seleccionado</a>
+    												</td>
+    												<td class="product-price">
+    													<span class="amount" id="precio_field">$0</span>
+    												</td>
+    												<td class="product-quantity" id="cantidad_field">
+    													1
+    												</td>
+    												<td class="product-subtotal">
+    													<span class="amount" id="sub_total_field">$0</span>
+    												</td>
+    											</tr>
+    										</tbody>
+    									</table>
+    
+    									<hr class="tall">
+    
+    									<h4 class="heading-primary">Términos y condiciones</h4>
+    									
+    									<div class="form-group">
+											<textarea class="form-control" rows="5" id="terms_and_conditions">
+												TÉRMINOS Y CONDICIONES
+LEA LOS TÉRMINOS DE ESTE DOCUMENTO Y EL AVISO DE PRIVACIDAD QUE EFECTUA ACTIME CON EL USUARIO (EL PARTICIPANTE) Y EL TARJETAHABIENTE (en caso de ser diferente al PARTICIPANTE), EN LO SUCESIVO A AMBOS SE LES DENOMINARÁ EL PARTICIPANTE ANTES DE SER REGISTRADO A UN EVENTO. AL PRESIONAR LA PALABRA "ACEPTAR" EL PARTICIPANTE ACEPTA TODOS Y CADA UNO DE LOS TERMINOS Y CONDICIONES DE ESTE ACUERDO Y POR ENDE QUEDA OBLIGADO A SU CUMPLIMIENTO. SI NO ESTA DE ACUERDO CON TODOS LOS TERMINOS DE ESTE DOCUMENTO DEBE DETENERSE Y NO CONTINUAR CON EL PROCESO DE INSCRIPCION. 
+1-. DERECHO DE INSCRIPCION:  ACTIME se reserva el derecho de inscripción de EL PARTICIPANTE cuando así lo considere necesario. La reserva de derecho de inscripción se basa pero no se limita en violaciones de este acuerdo de voluntades como pueden ser: proporcionar datos incorrectos en las formas de inscripción, mal uso de tarjetas de crédito, abuso del sistema digital Actime. ACTIME se reserva el derecho de inscripción tanto de EL PARTICIPANTE como de titular de la tarjeta de crédito con la que se registró EL PARTICIPANTE. Asimismo, EL PARTICIPANTE AUTORIZA A ASENTER PARA HACER EL CARGO RESPECTIVO EN LA TARJETA DE CRÉDITO QUE PROPORCIONA, ACEPTANDO EN TODOS SUS TÉRMINOS DICHO CARGO, RENUNCIANDO DESDE AHORA A HACER CUALQUIER RECLAMO AL BANCO EMISOR DE LA TARJETA DE CRÉDITO QUE HAYA PROPORCIONADO, RESPECTO DEL MULTICITADO CARGO Y LIBERANDO DE TODA RESPONSABILIDAD AL RESPECTO A AS DEPORTE. 
+2-. REEMBOLSOS: Las inscripciones hechas en el portal de inscripciones de ACTIME no son reembolsables bajo ningún motivo. Una vez que se haya registrado, pagado y obtenido un número de Participante a través de los diferentes medios de inscripciones utilizados por ACTIME, por lo que es responsabilidad de EL PARTICIPANTE si así lo requiere solicitar una compensación o reembolso directamente del organizador del EVENTO. 
+3-. LIMITE DE RESPONSABILIDAD: Actime no otorgará reembolsos por EVENTOS cancelados, sin importar la razón de dicha cancelación, por lo que EL PARTICIPANTE deberá en su caso acudir a tal efecto con el ORGANIZADOR del mismo, por lo que desde ahora deslinda de responsabilidad a ASENTER. La responsabilidad de ACTIME solo se limita a lo escrito en este documento. 
+EL PARTICIPANTE manifiesta que los datos que proporciona en las formas de inscripción son ciertos, y deslinda de responsabilidad alguna a ASENTER en caso de que el uso de estos datos perjudique en forma alguna a EL PARTICIPANTE y/o a cualquier otra persona. 
+Los operadores, organizadores y patrocinadores de cada evento han proporcionado información a ACTIME y ACTIME no tiene a su cargo la verificación ni certificación de la validez de esa información. Por lo tanto ACTIME no se hace responsable por daños que pueda sufrir EL PARTICIPANTE por la información proporcionada o no proporcionada a ACTIME por dicho operador o patrocinador. Por lo tanto ACTIME no se hace responsable por acción tomada por el ORGANIZADOR de cada evento. 
+Así mismo, el PARTICIPANTE manifiesta: “Reconozco y y acepto expresamente que: a) las actividades que se realizan durante el EVENTO son bajo mi propio riesgo, y la participación en el mismo así como mi ingreso a las áreas consideradas como restringidas, pueden o pudieran ocasionarme daños físicos, incluidos la invalidez parcial o total, parálisis y muerte (conjuntamente los RIESGOS); b) pidiendo estos RIESGOS ser provocados por mi propia omisión, actividad o inactividad antes durante o posterior al EVENTO, la omisión, actividad o inactividad de otros participantes en el EVENTO, las reglas del EVENTO, las condiciones y distribución de los establecimientos y equipo, o la negligencia de las personas a quienes en este acto libero de cualquier responsabilidad en todas las materias, o de las condiciones climáticas en la ciudad en la que se realice el EVENTO, o la realización propia de las actividades en que consiste el EVENTO; c) manifestando que puede existir otros RIESGOS en mi participación en el Evento no conocidos por mí o que aún no son previsibles ,ó que siendo previsibles son de mi conocimiento, lo reconozco y asumo, o que se deriven por caso fortuito o fuerza mayor; d) las perdidas sociales y económicas y/o daños directos o indirectos que puedan resultar de estos RIESGOS, pueden ser severas y modificar permanentemente mi futuro.”
+4.RECOLECCION DE PAQUETES: Es responsabilidad de EL PARTICIPANTE llevar el comprobante de de inscripción brindado por ACTIME u organizador, o bien una copia del presente documento, al registro de cada evento para recoger su paquete y/o reclamar su inscripción. LA CARTA DE CONFIRMACION DEBE IR FIRMADA POR EL TITULAR DE LA TARJETA DE CRÉDITO QUE SE USÓ PARA REGISTRAR Y PAGAR LA INSCRIPCIÓN DE EL PARTICIPANTE, ASÍ COMO POR EL PARTICIPANTE, EN CASO QUE ÉSTOS NO SEAN LA MISMA PERSONA. Sin la CARTA DE CONFIRMACION no se entregará el paquete y/o se llevar acabo registro alguno a EL PARTICIPANTE. 
+Falsificar firmas, usar una firma equivocada o de otro modo hacer mal uso de una tarjeta de crédito para inscribirse por medio de los servicios proporcionados por ACTIME es causal para que ACTIME reserve sus derechos de inscripción a futuros eventos tanto a EL PARTICIPANTE como al titular de la tarjeta con la que se pago la inscripción de EL PARTICIPANTE, por lo que en caso de darse los supuestos indicados, el PARTICIPANTE reconoce y acepta que éstos constituyen delitos por lo que ACTIME se reserva el derecho de ejercer las acciones legales a que haya lugar tanto en contra del PARTICIPANTE como al titular de la tarjeta con la que se registró y pagó la inscripción de EL PARTICIPANTE en caso de detectarse abuso o fraude en la inscripción de EL PARTICIPANTE, o en su caso de notificar a la institución financiera emisora de la Tarjeta de Crédito, para que ejerza las acciones legales correspondientes. 
+5.DEVOLUCION DE CHIP Y AUTORIZACION PARA REALIZAR EL CARGO EN CASO DE NO DEVOLUCION DEL MISMO: El uso del CHIP es responsabilidad DEL PARTICIPANTE y únicamente servirá para este evento, por lo que deberás devolverlo a los voluntarios al término de la competencia. ACTIME: En el supuesto de que el participante titular de esta inscripción no haga entrega del chip proporcionado como parte del paquete de inscripción al finalizar el evento y/o si por algún motivo no te presentas el día del evento, puedes entregarlo o enviarlo por correo a Paseo del Mineral #814, Paseo del Mineral, Colonia las Flores, CP, 99050 en Fresnillo, Zacatecas, México. 
+Si tienes cualquier duda sobre la entrega de tu chip, envía un correo electrónico a: Gerardo_glezbon@msn.com o bien contacta al teléfono: 8182577509 
+6-. DEFINICIÓN Y CONOCIMIENTO DE COMPRA/VENTA: La marca ACTIME es propiedad de personas físicas y ofrece servicio de cronometraje electrónico y plataforma de inscripciones en línea bajo la actividad empresarial  brindada por SHCP. ACTIME OFRECE EL DERECHO DE PARTICIPAR A EVENTOS “INSCRIPCIÓN” a cualquier persona “PARTICIPANTE” que cuente con los requisitos del respectivo evento a participar a cambio de la cantidad económica indicada en la descripción del evento (MÁS COMISIÓN DE LOS SERVICIOS TERCEROS, CUANDO SEA EL CASO). 
+7.- AVISO DE PRIVACIDAD 
+
+De acuerdo a lo Previsto en la “Ley Federal de Protección de Datos Personales”, ACTIME esresponsable del tratamiento de sus datos personales, hace de su conocimiento que la información de nuestros clientes es tratada de forma estrictamente confidencial por lo que al proporcionar sus datos personales, tales como: 
+
+1. Nombre Completo.
+2. Fecha de Nacimiento
+3. Dirección.
+5. Teléfonos  
+6. Correo Electrónico
+7. Carrera ó evento a participar
+8. Usuario y contraseña
+9. Persona de contacto encaso de emergencias
+10.Número de empelado
+11.Cualquier otro dato que se requieran para poder participar en los eventos 
+organizados por ACTIME.
+
+Estos serán utilizados única y exclusivamente para los siguientes fines: 
+1. Campañas de Publicidad.
+2. Campañas de Fidelidad.
+3. Información y Prestación de Servicios.
+4. Actualización de la Base de Datos.
+5. Cualquier finalidad análoga ó compatible con las anteriores. 
+
+Este aviso de privacidad podrá́ ser modificado por ACTIME, dichas modificaciones serán oportunamente informadas a través del portal web de Actime.
+											</textarea>
+										</div>
+										
+    									<div class="form-group">
+    										<span class="remember-box checkbox" checked="true">
+												<label>
+													<input type="checkbox" id="id_terms" name="terms">Acepto los términos y condiciones.
+												</label>
+											</span>
+    									</div>
+    									
+    									<hr class="tall">
+    
+    									<h4 class="heading-primary">Forma de Pago</h4>
+    
+										<div class="row">
+											<div class="col-md-12">
+												<span class="remember-box checkbox" checked="true" style="font-size:30px;">
+													<label>
+														<input type="checkbox"> <i class="fa fa-cc-paypal"></i> 
+													</label>
+												</span>
+											</div>
+										</div>
+    								</div>
+    							</div>
+    		                </div>
+    					</div>
+    
+    					<div class="actions-continue">
+    						<input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl">
+    					</div>
+                    </form>
+				</div>
+				<div class="col-md-3">
+					<h4 class="heading-primary">Total </h4>
+					<table class="cart-totals">
+						<tbody>
+							<tr class="cart-subtotal">
+								<th>
+									<strong>Subtotal</strong>
+								</th>
+								<td>
+									<strong><span class="amount" id="sub_total_field_right">$0</span></strong>
+								</td>
+							</tr>
+							<tr class="shipping">
+								<th>
+									Envío
+								</th>
+								<td>
+									No envío <input type="hidden" value="free_shipping" id="shipping_method" name="shipping_method">
+								</td>
+							</tr>
+							<tr class="total">
+								<th>
+									<strong>Total de orden</strong>
+								</th>
+								<td>
+									<strong><span class="amount" id="price_amount">$0</span></strong>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+	
+	<script>
+
+	    $(document).ready(function(){
+	        // Competittions json
+	        var competitions = {{competitions|jsonify|safe}};
+	        // Categories json
+	        var categories = {{categories|jsonify|safe}};
+	        // This will change the price acording to the json 
+	        $('#cb_competition').change(function () 
+	        {
+			    var str = "";
+			    // for each in the select
+			    $( "#cb_competition option:selected" ).each(function() 
+			    {
+					str += $( this ).text() + " ";
+			    });
+			    // For each in jquery
+			    $.each(competitions, function(i, item) 
+			    {
+			    	// Verify the if the selected item is in the list then put; 
+			    	// the price on the price shit.
+			    	if( str.includes(competitions[i].fields.name ) )
+			    	{
+			    		// Name of product  
+			    		$( "#producto_field" ).html( "Registro a competencia " + competitions[i].fields.name );
+			    		// Sub totals
+			    		$( "#sub_total_field_right" ).html( "$" + competitions[i].fields.cost );
+			    		$( "#precio_field" ).html( "$" + competitions[i].fields.cost );
+			    		$( "#sub_total_field" ).html( "$" + competitions[i].fields.cost );
+				    	$( "#sub_total_field2" ).html( "$" + competitions[i].fields.cost );
+			    		// Totals
+				    	$( "#price_amount" ).html( "$" + competitions[i].fields.cost );
+				    	$( "#total_field" ).html( "$" + competitions[i].fields.cost );
+				    	// here I will change the categories
+				    	$( "#id_category" ).html("<option value='0'>Selecciona una categoría</option>");
+				    	$.each(categories, function(j, category)
+				    	{
+				    		// If it is in the categories selected
+				    		if( competitions[i].fields.categories.includes( categories[j].pk ) )
+				    		{
+				    	    	$( "#id_category" ).append( "<option value='" + categories[j].pk + "'>" + categories[j].fields.name + "</option>" );
+				    		} // End of validation
+				    	}); // End of foreach
+				    }// End of if
+				});// End of the foreach
+			}).change();// End of the change function
+	    });// End of the ready function
+	    
+	</script>
+	
+{% endblock %}

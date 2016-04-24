@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+    	        
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main shop">
+        <div class="container">
+            <div class="row">
+				<div class="col-md-12">
+					<hr class="tall">
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-md-12">
+					<div class="featured-boxes">
+					    <div class="row">
+					        
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                
+							    <div class="col-sm-6">
+							        <div class="featured-box featured-box-primary align-left mt-xlg">
+                                        <div class="box-content">
+                                            <h4 class="heading-primary text-uppercase mb-md">Log In</h4>
+                                            <div class="row">
+												<div class="form-group">
+													<div class="col-md-12">
+                                                        {{ form | crispy }}
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-5">
+                                                                <input type="submit" class="btn btn-block btn-lg btn-success" value="{% trans 'Log in' %}" />
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-2">
+                                                                <center>
+                                                                    <h6>Or</h6>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-5">
+                                                               <a href="/accounts/register">
+                                                                   <button type="button" class="btn btn-block btn-lg btn-primary">
+                                                                       {% trans "Register" %}
+                                                                   </button>
+                                                               </a>
+                                                            </div>
+                                                            <br />
+                                                            
+                                                            <div class="col-md-12">
+                                                                <center>
+                                                                    <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+                                                                </center>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="next" value="{{ next }}" />
+                            </form>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock %}

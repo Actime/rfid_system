@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+<style type="text/css">
+    .console-line, .console-line>i{
+        
+        font-size : 12px;
+        
+    }
+    .temp-content, .pagination{
+        font-size : 14px;
+    }
+</style>
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+    
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main shop">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+					<hr class="tall">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<h1 class="mb-none"><strong>Restultados</strong></h1>
+					<p>Resultados disponibles.</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<ul class="products product-thumb-info-list" data-plugin-masonry>
+					{% for e in events %}
+					
+						<li class="col-md-3 col-sm-6 col-xs-12 product">
+							<span class="product-thumb-info">
+								<a href="/event/rd/{{e.pk}}" class="add-to-cart-product">
+									<span><i class="fa fa-edit"></i> Registro</span>
+								</a>
+								<a href="/event/rd/{{e.pk}}">
+									<span class="product-thumb-info-image">
+										<span class="product-thumb-info-act">
+											<span class="product-thumb-info-act-left"><em>Detalles</em></span>
+										</span>
+										<img alt="" class="img-responsive" src="{{e.image_url}}">
+									</span>
+								</a>
+								<span class="product-thumb-info-content">
+									<a href="shop-product-sidebar.html">
+										<h4>{{e.name}}</h4>
+										<span class="price">
+											<ins><span class="amount">{{e.date_start.date}}</span></ins>
+										</span>
+									</a>
+								</span>
+							</span>
+						</li>
+						
+					{% endfor %}
+				</ul>
+			</div>
+			
+		    <div class="row">
+                <span class="col-md-12">
+                    <ul class="pagination pull-right">
+                       	
+                        {% if events.has_previous %}
+                        	<li>
+                            	<a href="?page={{ events.previous_page_number }}"><i class="fa fa-chevron-left"></i> anterior</a>
+                        	</li>
+                        {% endif %}
+                    
+                        <li>
+	                        <span class="current">
+	                            Página {{ events.number }} de {{ events.paginator.num_pages }}.
+	                        </span>
+                		</li>
+                		{% if events.has_next %}
+                        	<li>
+                            	<a href="?page={{ events.next_page_number }}">siguiente <i class="fa fa-chevron-right"></i></a>
+                        	</li>
+                        {% endif %}
+                    </ul>
+                </span>
+                
+            </div>
+
+		</div>
+
+	</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+        
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main">
+
+		<section class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="#">Inicio</a></li>
+							<li class="active">Contacto</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Contacto</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-7">
+					<h2>Nosotros creamos los <strong>mejores</strong> eventos.</h2>
+					<p class="lead">Buscanos siempre a nosotros para obtener los mejores eventos cronometrados en el estado.</p>
+
+					<p></p>
+
+					<div class="row mt-xlg mb-xl">
+						<div class="col-md-6">
+							<div class="feature-box feature-box-style-2">
+								<div class="feature-box-icon">
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="feature-box-info">
+									<h4 class="heading-primary mb-xs">3 años creando eventos</h4>
+									<p>Empezamos creando eventos para el estado a nivel local y esperamos tener muchos más clientes contentos.</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="feature-box feature-box-style-2">
+								<div class="feature-box-icon">
+									<i class="fa fa-heart"></i>
+								</div>
+								<div class="feature-box-info">
+									<h4 class="heading-primary mb-xs">Los competidores están contentos</h4>
+									<p>Con más de mil competidores en tres años, ellos llegan felices a la meta; familia, amigos, parejas, todos llegan con una sonrisa.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<hr class="tall">
+
+					<h4>Galería</h4>
+
+					<div data-plugin-lightbox data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+						<div class="row">
+							<div class="col-md-4">
+								<a class="img-thumbnail mb-xl" href="http://i.imgur.com/oaC7Klu.jpg" data-plugin-options='{"type":"image"}'>
+									<img class="img-responsive" src="http://i.imgur.com/oaC7Klu.jpg" alt="Office">
+									<span class="zoom">
+										<i class="fa fa-search"></i>
+									</span>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="img-thumbnail mb-xl" href="http://i.imgur.com/K9BJXgA.jpg" data-plugin-options='{"type":"image"}'>
+									<img class="img-responsive" src="http://i.imgur.com/K9BJXgA.jpg" alt="Office">
+									<span class="zoom">
+										<i class="fa fa-search"></i>
+									</span>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="img-thumbnail mb-xl" href="http://i.imgur.com/JtnUEnA.jpg" data-plugin-options='{"type":"image"}'>
+									<img class="img-responsive" src="http://i.imgur.com/JtnUEnA.jpg" alt="Office">
+									<span class="zoom">
+										<i class="fa fa-search"></i>
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-5">
+					<h4>Eventos <strong>memorables</strong></h4>
+
+					<!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
+					<div>
+					    <img class="img-responsive" src="http://i.imgur.com/iZTZWEE.jpg">
+					</div>
+
+					<ul class="list list-icons list-icons-style-3 mt-xlg">
+						<li><i class="fa fa-map-marker"></i> <strong>Dirección:</strong> Catorena y Ursua #37, Colonia Periodistas</li>
+						<li><i class="fa fa-phone"></i> <strong>Teléfono:</strong> (493)-114-33-34</li>
+						<li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:actimemx@gmail.com">actimemx@gmail.com</a></li>
+					</ul>
+
+					<hr>
+
+					<h4>Horarios</h4>
+					<ul class="list list-icons list-dark mt-xlg">
+						<li><i class="fa fa-clock-o"></i> Lunes - Viernes 9am to 5pm</li>
+						<li><i class="fa fa-clock-o"></i> Sábado - 9am to 2pm</li>
+						<li><i class="fa fa-clock-o"></i> Domingo - Cerrado</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    
+{% endblock %}

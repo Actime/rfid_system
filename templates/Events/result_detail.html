@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load app_filters %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main">
+        <section class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="#">Inicio</a></li>
+							<li class="active">Resultados</li>
+							<li class="active">Resultado</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>{{event.name}}</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<hr class="tall">
+		
+        <div class="container">
+        	<div class="row">
+				<div class="col-md-7">
+					<h2><i class="fa fa-history"></i> {{event.name}}</h2>
+					<p><i class="fa fa-align-justify"></i> {{event.description}}</p>
+
+					<hr class="tall">
+
+					<h4>Galería de fotos</h4>
+
+					<div data-plugin-lightbox data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+						<div class="row">
+							{% for g in event|get_galery %}
+								<div class="col-md-4">
+									<a class="img-thumbnail mb-xl" href="{{g.image_url}}" data-plugin-options='{"type":"image"}'>
+										<img class="img-responsive" src="{{g.image_url}}" alt="Office">
+										<span class="zoom">
+											<i class="fa fa-search"></i>
+										</span>
+									</a>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+					
+					<h4>Vídeos</h4>
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe frameborder="0" allowfullscreen="" src="https://www.youtube.com/embed/oNBBijn4JuY?showinfo=0&amp;wmode=opaque"></iframe>
+					</div>
+
+				</div>
+				<div class="col-md-5">
+					<h4></h4>
+
+					<!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
+					<div class="row">
+						<div class="col-md-12">
+				    		<img class="img-responsive img-rounded mb-lg" src="{{event.image_url}}" alt="{{event.name}}">
+						</div>
+					</div>
+					<div class="row">
+						<br />
+						<div class="col-md-12">
+							<h3>Resultados</h3>
+						</div>
+						<div class="col-md-5">
+							<ul class="list list-icons list-icons-style-3 mt-xlg">
+								<li><i class="fa fa-male"></i> <a href="#">Varonil</a></li>
+								<li><i class="fa fa-female"></i> <a href="#">Femenil</a></li>
+								<li><i class="fa fa-search"></i> <a href="mailto:mail@example.com">Buscar</a></li>
+							</ul>
+						</div>
+						<div class="col-md-7">
+							<ul class="list list-icons list-icons-style-2 mt-xlg">
+								{% for c in event|get_all_competitions %}
+									<li><a href="#"><i class="fa fa-list-ol"></i> {{c.name}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<hr>
+				</div>
+			</div>
+			
+        </div>
+        
+    </div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    
+{% endblock %}

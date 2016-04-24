@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block extra_head %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}" >
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+    	        
+{% endblock %}
+
+{% block content %}
+    
+    <div role="main" class="main shop">
+        <div class="container">
+            <div class="row">
+				<div class="col-md-12">
+					<hr class="tall">
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-md-12">
+					<div class="featured-boxes">
+					    <div class="row">
+					        
+                            <form method="post" action="">
+                                {% csrf_token %}
+							    <div class="col-sm-6">
+							        
+									<div class="featured-box featured-box-primary align-left mt-xlg">
+                                        <div class="box-content">
+                                            <h4 class="heading-primary text-uppercase mb-md">Competitor Information</h4>
+                                            <div class="row">
+												<div class="form-group">
+													<div class="col-md-12">
+                                                        <p>
+        												    {% if form.name.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.name.errors }}</div>
+        												    {% endif %}
+    												    </p>
+                                                        <p> {{ form.name }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.second_name.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.second_name.errors }}</div>
+        												    {% endif %}
+                                                        </p>
+                                                        <p> {{ form.second_name }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.city.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.city.errors }}</div>
+        												    {% endif %}
+    												    </p>
+                                                        <p> {{ form.city }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.state.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.state.errors }}</div>
+        												    {% endif %}
+        												</p>
+                                                        <p> {{ form.state }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.country.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.country.errors }}</div>
+        												    {% endif %}
+                                                        </p>
+                                                        <p> {{ form.country }} </p>
+    												    
+    												    <p>
+        												    {% if form.address.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.address.errors }}</div>
+        												    {% endif %}
+                                                        </p>
+                                                        <p> {{ form.address }} </p>
+    												    
+    												    <p>
+        												    {% if form.address2.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.address2.errors }}</div>
+        												    {% endif %}
+        												</p>
+                                                        <p> {{ form.address2 }} </p>
+    												    
+    												    <p>
+        												    {% if form.zip_code.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.zip_code.errors }}</div>
+        												    {% endif %}
+                                                        </p>
+                                                        <p> {{ form.zip_code }} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+							    </div>
+							    <div class="col-sm-6">
+									<div class="featured-box featured-box-primary align-left mt-xlg">
+										<div class="box-content">
+                                            <h4 class="heading-primary text-uppercase mb-md">User information</h4>
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.sex.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.sex.errors }}</div>
+    												    {% endif %}
+                                                        <label>Sexo</label>
+                                                        {{ form.sex }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.birth_date.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.birth_date.errors }}</div>
+    												    {% endif %}
+    												    <label>Fecha de nacimiento</label>
+                                                        {{ form.birth_date }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.phone_number.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.phone_number.errors }}</div>
+    												    {% endif %}
+                                                        {{ form.phone_number }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.username.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.username.errors }}</div>
+    												    {% endif %}
+                                                        {{ form.username }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.email.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.email.errors }}</div>
+    												    {% endif %}
+                                                        {{ form.email }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.password1.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.password1.errors }}</div>
+    												    {% endif %}
+                                                        {{form.password1 }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+    											<div class="form-group">
+    												<div class="col-md-12">
+    												    {% if form.password2.errors %}
+                                                            <div class="alert alert-danger" role="alert">{{ form.password2.errors }}</div>
+    												    {% endif %}
+                                                        {{ form.password2 }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+												<div class="col-md-12">
+													<input type="submit" value="{% trans 'Register' %}" class="btn btn-primary pull-right mb-xl" data-loading-text="Loading...">
+												</div>
+											</div>
+                                        </div>
+                                    </div>
+							    </div>
+						    </form>
+						    
+						</div>
+				    </div>
+			    </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block extra_scripts %}
+
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+
+<script type="text/javascript">
+    
+    // when the document is ready do this shit
+    $(document).ready(function(){
+        
+        // Fuck you lucho form-control input-lg
+        // This will add magic to the buttons he, he
+        $('#id_username').attr('class', 'form-control input-lg');
+        $('#id_username').attr('placeholder', 'Nombre de Usuario');
+        
+        $('#id_email').attr('class', 'form-control input-lg');
+        $('#id_email').attr('placeholder', 'E-mail');
+        
+        $('#id_password1').attr('class', 'form-control input-lg');
+        $('#id_password1').attr('placeholder', 'Contraseña');
+        
+        $('#id_password2').attr('class', 'form-control input-lg');
+        $('#id_password2').attr('placeholder', 'Repita Contraseña');
+        
+        $('#id_birth_date').datepicker({
+            format: "yyyy-mm-dd"
+        });
+        
+    });// End of document jquery ready function
+    
+</script>
+
+{% endblock %}

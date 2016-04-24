@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+    	        
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="alert alert-warning" role="alert">
+                <p>{% trans "Porfavor revisa tu correo para que puedas aprovar tu registro. Gracias." %}</p>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock %}
