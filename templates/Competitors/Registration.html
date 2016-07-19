@@ -10,6 +10,13 @@
 
 {% block extra_head %}
 
+	<style type="text/css">
+		.icon_pay {
+			font-size : 20px;
+			margin-top : 10px;
+		}
+		
+	</style>
 {% endblock %}
 
 {% block header_content %}
@@ -34,6 +41,15 @@
 				<div class="col-md-12">
 					<h2 class="mb-none"><strong>Registro </strong></h2>
 				</div>
+				{% if errors %}
+					<div class="col-md-12">
+						<div class="alert alert-danger" role="alert">
+							{% for e in errors %}
+								{{ e }}<br />
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
 			</div>
 
 			<div class="row">
@@ -199,7 +215,7 @@ Este aviso de privacidad podrá́ ser modificado por ACTIME, dichas modificacion
     									<div class="form-group">
     										<span class="remember-box checkbox" checked="true">
 												<label>
-													<input type="checkbox" id="id_terms" name="terms">Acepto los términos y condiciones.
+													<input type="checkbox" class="form-control" id="id_terms" name="terms"> <div class="icon_pay">Acepto los términos y condiciones.</div>
 												</label>
 											</span>
     									</div>
@@ -209,12 +225,8 @@ Este aviso de privacidad podrá́ ser modificado por ACTIME, dichas modificacion
     									<h4 class="heading-primary">Forma de Pago</h4>
     
 										<div class="row">
-											<div class="col-md-12">
-												<span class="remember-box checkbox" checked="true" style="font-size:30px;">
-													<label>
-														<input type="checkbox"> <i class="fa fa-cc-paypal"></i> 
-													</label>
-												</span>
+											<div class="col-md-12 text-right">
+												Por el momento solamente aceptamos pagos mediante Paypal. <i class="fa fa-cc-paypal icon_pay"></i>
 											</div>
 										</div>
     								</div>
@@ -223,7 +235,7 @@ Este aviso de privacidad podrá́ ser modificado por ACTIME, dichas modificacion
     					</div>
     
     					<div class="actions-continue">
-    						<input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl">
+    						<input type="submit" value="Pagar" name="proceed" class="btn btn-lg btn-primary mt-xl">
     					</div>
                     </form>
 				</div>

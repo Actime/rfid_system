@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load i18n %}
+
+{% load app_filters %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main">
+		<section class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="/">Inicio</a></li>
+							<li class="active">Equipos</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Crea un nuevo equipo</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="container">
+
+			<div class="row">
+			    
+                <div class="col-md-12">
+					<div class="featured-boxes">
+					    <div class="row">
+					        
+                            <form method="post" action="">
+                                {% csrf_token %}
+							    <div class="col-sm-6">
+							        
+									<div class="featured-box featured-box-primary align-left mt-xlg">
+                                        <div class="box-content">
+                                            <h4 class="heading-primary text-uppercase mb-md">Información de equipo</h4>
+                                            <div class="row">
+												<div class="form-group">
+													<div class="col-md-12">
+                                                        <p>
+        												    {% if form.name.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.name.errors }}</div>
+        												    {% endif %}
+    												    </p>
+                                                        <p> {{ form.name }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.description.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.description.errors }}</div>
+        												    {% endif %}
+                                                        </p>
+                                                        <p> {{ form.description }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.city.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.city.errors }}</div>
+        												    {% endif %}
+    												    </p>
+                                                        <p> {{ form.city }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.state.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.state.errors }}</div>
+        												    {% endif %}
+        												</p>
+                                                        <p> {{ form.state }} </p>
+                                                        
+                                                        <p>
+        												    {% if form.country.errors %}
+                                                                <div class="alert alert-danger" role="alert">{{ form.country.errors }}</div>
+        												    {% endif %}
+                                                        </p>
+                                                        <p> {{ form.country }} </p>
+    												    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+												<div class="col-md-12">
+													<input type="submit" value="{% trans 'Guardar' %}" class="btn btn-primary pull-right mb-xl" data-loading-text="Loading...">
+												</div>
+											</div>
+                                        </div>
+                                    </div>
+							    </div>
+							    <div class="col-sm-6"></div>
+						    </form>
+						</div>
+				    </div>
+			    </div>
+			    
+			</div>
+
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+	
+{% endblock %}

@@ -9,7 +9,11 @@
 {% block extra_head %}
 
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11,r-2.0.2,se-1.1.2/datatables.min.css"/>
-
+	<style type="text/css">
+		table.dataTable {
+			min-width : 100%;	
+		}
+	</style>
 {% endblock %}
 
 {% block header_content %}
@@ -43,11 +47,16 @@
 		<div class="container">
 
 			<div class="row">
+				
 				<div class="col-md-12">
-                    <hr class="tall">
-                
+					
+					<hr class="tall">
                 	<h4>Hover rows</h4>
-                
+				
+				</div>
+				
+				<div class="col-md-12">
+                	
                 	<table class="display" id="results_table">
                 		<thead>
                 			<tr>
@@ -90,21 +99,26 @@
                     				    {{r.competition}}
                     				</td>
                     				<td>
-                    				    ----1------
+                    					<p>
+	                    				    {% for tr in r|get_time_registers %}
+	                    				    	{{ tr.time }}<br>
+	                    				    {% endfor %}
+                    				    </p>
                     				</td>
                     				<td>
-                    				    lugar
+                    				    {{ r.competitor|get_competitors_place_cat:r.competition }}
                     				</td>
                     				<td>
-                    				    lugar
+                    				    {{ r.competitor|get_competitors_place_global:r.competition }}
                     				</td>
                     			</tr>
                 			{% endfor %}
                 		</tbody>
                 	</table>
                 
-                	<hr class="tall">
                 </div>
+                
+            	<hr class="tall">
             </div>
             
         </div>

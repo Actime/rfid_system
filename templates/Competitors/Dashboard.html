@@ -18,7 +18,255 @@
 
 {% block content %}
 
-<h2>Dashboard Bitch!!!</h2>
+    <div role="main" class="main">
+		<section class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb">
+							<li><a href="/">Inicio</a></li>
+							<li class="active">Dashboard</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Bienvenido {{competitor}}</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-3">
+					<aside class="sidebar">
+
+						<h4 class="heading-primary text-center">Información</h4>
+						<div class="text-left">
+    						<p>
+    							<h5><i class="fa fa-envelope-o" aria-hidden="true"></i> E-mail</h5>
+    							<p>{{competitor.email}}</p>
+    						</p>
+    						<p>
+    							<h5><i class="fa fa-mobile" aria-hidden="true"></i> Télefono</h5>
+    							<p>{{competitor.phone_number}}</p>
+    						</p>
+    						<p>
+    							<h5><i class="fa fa-calendar" aria-hidden="true"></i> Fecha de nacimiento</h5>
+    							<p>{{competitor.birth_date}}</p>
+    						</p>
+    						<p>
+    						    <h5><i class="fa fa-street-view" aria-hidden="true"></i> Dirección</h5>
+    							<p>
+    							    {{competitor.city}}<br />
+    							    {{competitor.state}}<br />
+    							    {{competitor.country}}<br />
+    							    {{competitor.address}}<br />
+    							    {{competitor.address2}}<br />
+    							    {{competitor.zip_code}}<br />
+    							</p>
+    						</p>
+                        </div>
+						<div class="tabs mb-xlg">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#popularPosts" data-toggle="tab"><i class="fa fa-star"></i> Equipos</a></li>
+								<li><a href="#recentPosts" data-toggle="tab">Actividad</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="popularPosts">
+									<ul class="simple-post-list">
+										{% if not teams %}
+											<li>
+												<div class="alert alert-danger" role="alert">
+													<span class="fa fa-frown-o" aria-hidden="true"></span>
+													Aún no tienes equipos registrados; crea uno por primera vez <a href="{% url 'views.competitor.team' %}">aquí</a>.
+												</div>
+											</li>
+										{% else %}
+										
+											{% for t in teams %}
+												<li>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="post-info">
+																<a href="">{{t.name}}</a>
+																<div class="post-meta">
+																	{{t.description}}
+																</div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															{{t.city}}<br />
+															{{t.state}}<br />
+															{{t.country}}
+														</div>
+													</div>
+												</li>
+											{% endfor %}
+											<hr />
+											<h4 class="heading-primary">¿Tienes un equipo?</h4>
+						
+											<p>
+											    Quieres inscribir a un equipo, hazlo <a href="{% url 'views.competitor.team' %}">aquí</a>.
+											</p>
+										{% endif %}
+									</ul>
+								</div>
+								<div class="tab-pane" id="recentPosts">
+									<ul class="simple-post-list">
+										<li>
+											<div class="post-image">
+												<div class="img-thumbnail">
+													<a href="blog-post.html">
+														<img src="img/blog/blog-thumb-2.jpg" alt="">
+													</a>
+												</div>
+											</div>
+											<div class="post-info">
+												<a href="blog-post.html">Vitae Nibh Un Odiosters</a>
+												<div class="post-meta">
+													 Jan 10, 2016
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<hr>
+						
+						<h4 class="heading-primary">¿Quieres cronometrar tu carrera?</h4>
+						<p>
+						    Contáctanos <a href="/contact/">aquí</a>.
+						</p>
+
+					</aside>
+				</div>
+				<div class="col-md-9">
+
+					<h2>Tus <strong>registros</strong></h2>
+
+					<div class="row bs-callout bs-callout-danger">
+						<div class="col-md-12" style="overflow:scroll; height:400px;">
+							{% if not past_events %}
+								<div class="alert alert-danger" role="alert">
+									<span class="fa fa-frown-o" aria-hidden="true"></span>
+									No tienes carreras, pero ¿Qué esperas? ¡Inscríbete ya!
+								</div>
+							{% else %}
+								{% for r in registrations %}
+									<div class="col-md-6">
+										<div class="row">
+											<div class="col-md-4">
+												<img src="{{r.competition.competition_event.image_url}}" class="img-responsive" alt="...">
+											</div>
+											<div class="col-md-8">
+												<h5><a href="/event/{{r.competition.competition_event.pk}}">{{r.competition.competition_event.name}}</a></h5>
+												<p>
+													Tiempo : {{competitor|get_competitors_time:r.competition.competition_event}}
+												</p>
+												<p>
+													Lugar General : {{competitor|get_competitors_place_global:r.competition.competition_event}}<br />
+													Lugar Categoría : {{competitor|get_competitors_place_cat:r.competition.competition_event}}
+												</p>
+												<small>{{r.competition.competition_event.date_start}} a {{r.competition.competition_event.date_finish}}</small>
+											</div>
+										</div>
+										<hr />
+									</div>
+                                {% endfor %}
+	        				{% endif %}
+						</div>
+					</div>
+					<hr />
+					<h2>¡<strong>Próximas</strong> carreras!</h2>
+
+					<div class="row">
+						<div class="col-md-12">
+							{% if not next_events %}
+								<div class="alert alert-danger" role="alert">
+								  	<span class="fa fa-frown-o" aria-hidden="true"></span>
+								  	No hay próximos eventos.
+								</div>
+							{% else %}
+								<div class="owl-carousel owl-theme full-width" data-plugin-options='{"items": 5, "loop": false, "nav": true, "dots": false}'>
+	                				{% for ne in next_events %}
+	                					<div>
+	                						<a href="/event/{{ne.pk}}">
+	                							<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+	                								<span class="thumb-info-wrapper">
+	                									<img src="{{ne.image_url}}" class="img-responsive" alt="">
+	                									<span class="thumb-info-title">
+	                										<span class="thumb-info-inner">{{ne.name}}</span>
+	                										<span class="thumb-info-type">{{ne.event_type.name}}</span>
+	                									</span>
+	                									<span class="thumb-info-action">
+	                										<span class="thumb-info-action-icon"><i class="fa fa-external-link-square"></i></span>
+	                									</span>
+	                								</span>
+	                							</span>
+	                						</a>	
+	                					</div>
+	                				{% endfor %}
+	                			</div>
+	                		{% endif %}
+						</div>
+						{% if next_events %}
+							<div class="col-md-12 text-center">
+							    <a href="/event/"><button type="button" class="btn btn-3d btn-tertiary mr-xs mb-lg">Todos</button></a>
+							</div>
+						{% endif %}
+					</div>
+
+					<h2>Carreras <strong>pasadas</strong></h2>
+
+					<div class="row">
+						<div class="col-md-12">
+							{% if not past_events %}
+								<div class="alert alert-danger" role="alert">
+								  	<span class="fa fa-frown-o" aria-hidden="true"></span>
+									No hay resultados aún.
+								</div>
+							{% else %}
+								<div class="owl-carousel owl-theme" data-plugin-options='{"items": 4, "margin": 20, "loop": false}'>
+	                                {% for e in past_events %}
+	                                    <div class="portfolio-item">
+	                                        <a href="/event/rd/{{e.pk}}" data-portfolio-on-modal>
+	                                            <span class="thumb-info thumb-info-lighten">
+	                                                <span class="thumb-info-wrapper">
+	                                                    <img src="{{e.image_url}}" class="img-responsive" alt="">
+	                                                    <span class="thumb-info-title">
+	                                                        <span class="thumb-info-inner">{{e.name}}</span>
+	                                                        <span class="thumb-info-type">{{e.date_start}}</span>
+	                                                    </span>
+	                                                    <span class="thumb-info-action">
+	                                                        <span class="thumb-info-action-icon"><i class="fa fa-clock-o"></i></span>
+	                                                    </span>
+	                                                </span>
+	                                            </span>
+	                                        </a>
+	                                    </div>
+	                                {% endfor %}
+	        					</div>
+	        				{% endif %}
+						</div>
+						{% if past_events %}
+							<div class="col-md-12 text-center">
+							    <a href="/event/results/"><button type="button" class="btn btn-3d btn-tertiary mr-xs mb-lg">Todos</button></a>
+							</div>
+						{% endif %}
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
 
 {% endblock %}
 

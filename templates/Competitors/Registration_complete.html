@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load app_filters %}
+
+{% load json_tags %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header_content %}
+
+    {% include 'common/header_body.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div role="main" class="main shop">
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+					<hr class="tall">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="mb-none"><strong>Registro a competencia completado. </strong></h2>
+				</div>
+			</div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+				    <p>
+				        Evento : {{register.competition.competition_event}}<br />
+				        Competidor : {{register.competitor}}<br />
+                        Competencía : {{register.competition}}<br />
+                        Categoría : {{register.category}}<br />
+                        Equipo : {{register.team}} <br />
+                        Número de competidor : {{register.competitor_num}}<br />
+                        Estado del registro : {{register.register_state}}<br />
+                        Estado del kit : {{register.kit_state}}<br />
+                        <br />
+                        Fecha de registro : {{register.timestamp}} <br/>
+                        <input type="button" 
+                            onClick="window.print()" 
+                            value="imprimir"/>
+                        
+				    </p>
+				</div>
+            </div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+	
+{% endblock %}

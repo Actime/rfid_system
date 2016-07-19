@@ -1,5 +1,7 @@
 {% load staticfiles %}
 
+{% load social_widgets %}
+
 {% load app_filters %}
 
 {% if not content %}
@@ -9,7 +11,7 @@
 <footer id="footer">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="newsletter">
 					
 					<h4>{{content.contents.footer.content.about.title}}</h4>
@@ -23,12 +25,6 @@
 
 				</div>
 			</div>
-			<div class="col-md-3">
-				<h4>{{content.contents.footer.content.latest_events}}</h4>
-				<div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "", "count": 2}'>
-					<p></p>
-				</div>
-			</div>
 			<div class="col-md-4">
 				<div class="contact-details">
 					<h4>{{content.contents.footer.content.contact_us.title}}</h4>
@@ -39,12 +35,11 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<h4>{{content.contents.footer.content.follow_us}}</h4>
-				<ul class="social-icons">
-					<li class="social-icons-facebook"><a href="https://www.facebook.com/Actime-960490897375387/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-					<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-				</ul>
+				<div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "", "count": 2}'>
+					{% social_widget_render "facebook/likebox.html" href="https://www.facebook.com/Actime-960490897375387" %}
+				</div>
 			</div>
 		</div>
 	</div>

@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% load social_widgets %}
+
 {% load app_filters %}
 
 {% block title %} {{title}} {% endblock %}
@@ -71,7 +73,12 @@
 									<button type="button" class="btn btn-danger btn-lg"><i class="fa fa-pencil-square-o"></i> Inscribete</button>
 								</a>
 								<br><br><br>
-								<button type="button" class="btn btn-borders btn-info btn-lg"><i class="fa fa-share-alt"></i> Comparte</button>
+								<!-- Your share button code -->
+								<div class="fb-share-button btn btn-borders btn-info btn-lg" 
+									data-href="http://actime.mx/event/{{event.pk}}" 
+									data-layout="button_count">
+								</div>
+								
 							</div>
 						</center>
 						<div class="col-md-12">
@@ -260,27 +267,13 @@
                 							<h4>Convocatorias</h4>
                 
                 							<div class="owl-carousel owl-theme nav-bottom rounded-nav" data-plugin-options='{"loop": false, "nav": true, "dots": false}'>
-                								<div>
-                									<img class="img-responsive" src="http://i.imgur.com/xc30Kyl.png" alt="">
-                									<span class="label label-sm label-info">Patro...</span>
-                								</div>
-                								<div>
-                									<img class="img-responsive" src="http://i.imgur.com/kMdvOwE.png" alt="">
-                									<span class="label label-sm label-info">Patro...</span>
-                								</div>
-                								<div>
-                									<img class="img-responsive" src="http://i.imgur.com/kMdvOwE.png" alt="">
-                									<span class="label label-sm label-info">Patro...</span>
-                								</div>
-                								<div>
-                									<img class="img-responsive" src="http://i.imgur.com/xc30Kyl.png" alt="">
-                									<span class="label label-sm label-info">Patro...</span>
-                									
-                								</div>
-                								<div>
-                									<img class="img-responsive" src="http://i.imgur.com/xc30Kyl.png" alt="">
-                									<span class="label label-sm label-info">Patro...</span>
-                								</div>
+                								{% for c in event|get_all_conv %}
+	                								<div>
+	    												<a href="{{c.image_url}}">
+	                										<img class="img-responsive" src="{{c.image_url}}" alt="" href="{{c.image_url}}">
+	                									</a>
+	                								</div>
+                								{% endfor %}
                 							</div>
 										</li>
 									</ul>
@@ -293,7 +286,7 @@
 												<div class="post-image">
 													<div class="img-thumbnail">
 														<a href="blog-post.html">
-															<img src="{{p.image_url}}" alt="">
+															<img class="img-responsive" src="{{p.image_url}}" alt="">
 														</a>
 													</div>
 												</div>

@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'registration',
     'crispy_forms',
     'django_facebook',
+    'social_widgets',
     'api',
     'customusers',
     'states',
