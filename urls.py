@@ -30,5 +30,6 @@ urlpatterns = [
     # The facebook shit
     url( r'^facebook/', include('django_facebook.urls')),
     url( r'^accounts/', include('django_facebook.auth_urls')),
+    url( r'^paypal/', include('paypal.standard.ipn.urls')),
     
 ]# End of general sytem url patterns

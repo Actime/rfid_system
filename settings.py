@@ -24,7 +24,7 @@ SECRET_KEY = 'dkng6p3fkt4%)fz+gi3a146al-xj@l#b=#i%rl12&&ln#tqjxa'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [  ]
+ALLOWED_HOSTS = [ ]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'paypal.standard.ipn',
+    'corsheaders',
     'registration',
     'crispy_forms',
     'django_facebook',
@@ -51,6 +53,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -96,6 +99,13 @@ AUTHENTICATION_BACKENDS = (
     'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 WSGI_APPLICATION = 'rfid_system.wsgi.application'
 
@@ -165,3 +175,49 @@ EMAIL_HOST_PASSWORD = '%Ralogu2'
 EMAIL_HOST_USER = 'actimemx@gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost',
+    'localhost:3000',
+    'http://localhost:3000',
+    'https://guarded-eyrie-92119.herokuapp.com',
+    'guarded-eyrie-92119.herokuapp.com',
+    'admin.actime.mx'
+)
+   
+CORS_ORIGIN_REGEX_WHITELIST = ()
+CORS_URLS_REGEX = r'^/api/.*$'
+
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+)   
+
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'X-Custom-Header'
+)
+
+CORS_PREFLIGHT_MAX_AGE = 86400
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_REPLACE_HTTPS_REFERER = False
+
+import paypalrestsdk
+paypalrestsdk.configure({
+  'mode': 'sandbox',
+  'client_id': 'AYBXzGYo7gDQ0OFn3TYJgmXC1WdoCNoKBFNCBuPf73YkKQHOBqiWPIgkwgSI4FxSyo7KAKavDPZe_Dc-',
+  'client_secret': 'EAWo9h6cellhmVbfU8REjliJOTMCsNqID41cQ2PhriuPjrxX8pxZ4I_rZnGQTKYq789ARIEzrEs1Sw4Z'
+})
